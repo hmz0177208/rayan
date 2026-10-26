@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ku">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>شوێنکەوتنی حەواڵەی وێسترن یونیۆن بە MTCN | سەرافی ڕەیان</title>
+<!-- SEO Meta Tags for Search Engines & AI -->
+<meta content="ژمارەی ١٠ ژمارەیی MTCN بەکاربهێنە بۆ پشکنینی دۆخی حەواڵەی وێسترن یونیۆن. مەرجەکانی وەرگرتن بە حەواڵە و شوێنی مەبەستەوە پەیوەستن." name="description"/>
+<meta content="شوێنکەوتنی MTCN وێسترن یونیۆن، شوێنکەوتنی گواستنەوەی پارە، دۆخی حەواڵە بە ئۆنلاین" name="keywords"/>
+<meta content="index, follow" name="robots"/>
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "Al-Rayyan Exchange - Western Union Tracking",
+  "description": "Official Western Union money transfer tracking tool by Al-Rayyan Exchange",
+  "url": "https://rayyap.com/ku/western-union/track-transfer.html"
+}
+</script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
+        body { background-color: #f4f5f7; color: #2d3748; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* Top Header Navigation */
+        .app-header { background-color: #122230; color: #ffffff; height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; position: sticky; top: 0; z-index: 1000; }
+        .app-header .header-title { font-size: 18px; font-weight: 500; color: #ffcc00; }
+        .app-header .back-btn { background: none; border: none; color: #ffffff; font-size: 20px; cursor: pointer; text-decoration: none; }
+        .app-header .menu-btn { background: transparent; border: 1px solid #4a5568; color: #63b3ed; padding: 4px 12px; border-radius: 4px; font-weight: 500; font-size: 14px; cursor: pointer; }
+
+        /* Navigation Tabs (Sender / Receiver) */
+        .tab-container { display: flex; background-color: #e2e8f0; width: 100%; border-bottom: 1px solid #cbd5e0; }
+        .tab-btn { flex: 1; padding: 14px 0; border: none; background: #e2e8f0; color: #718096; font-size: 15px; font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: all 0.3s ease; }
+        .tab-btn.active { background-color: #2b80b9; color: #ffffff; }
+        .tab-btn svg { width: 22px; height: 22px; fill: currentColor; }
+
+        /* Main Container Forms */
+        .content-area { flex: 1; max-width: 550px; width: 100%; margin: 0 auto; padding: 20px 16px; }
+
+        /* Form Step 1: Input MTCN */
+        #step-input-form { background: #ffffff; padding: 24px 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .form-instruction { font-size: 15px; color: #2d3748; margin-bottom: 25px; line-height: 1.4; }
+        
+        .input-group { margin-bottom: 25px; }
+        .input-group label { display: block; font-size: 13px; color: #718096; margin-bottom: 6px; font-weight: 500; }
+        .custom-input { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #cbd5e0; outline: none; font-size: 18px; color: #1a202c; transition: border-color 0.2s; background: transparent; }
+        .custom-input:focus { border-color: #2b80b9; }
+        
+        .mtcn-formatted-input { letter-spacing: 3px; font-weight: bold; }
+        .find-mtcn-link { display: block; text-align: right; color: #2b80b9; font-size: 14px; text-decoration: none; font-weight: 500; margin-top: 15px; }
+
+        .btn-next-container { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; padding: 12px 16px; border-top: 1px solid #e2e8f0; max-width: 550px; margin: 0 auto; }
+        .btn-next { width: 100%; padding: 14px; background-color: #2b80b9; color: #ffffff; border: none; border-radius: 4px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; text-align: center; }
+        .btn-next:disabled { background-color: #cbd5e0; cursor: not-allowed; }
+
+        /* Form Step 2: Transfer Status Display */
+        #step-status-view { display: none; }
+        .status-header-card { background: #f0f4f8; padding: 15px; text-align: center; border-radius: 6px; margin-bottom: 25px; border: 1px solid #e2e8f0; }
+        .status-header-card .mtcn-label { font-size: 14px; color: #718096; }
+        .status-header-card .mtcn-value { font-size: 22px; font-weight: bold; color: #1a202c; margin-top: 4px; letter-spacing: 1px; }
+
+        /* Timeline Tracking Visualizer */
+        .timeline { position: relative; padding-left: 45px; margin-bottom: 30px; }
+        .timeline::before { content: ''; position: absolute; left: 17px; top: 12px; bottom: 12px; width: 3px; background-color: #e2e8f0; z-index: 1; }
+        .timeline-step { position: relative; margin-bottom: 30px; }
+        .timeline-step:last-child { margin-bottom: 0; }
+
+        .timeline-icon { position: absolute; left: -45px; top: -2px; width: 36px; height: 36px; border-radius: 50%; background: #ffffff; border: 2px solid #cbd5e0; z-index: 2; display: flex; align-items: center; justify-content: center; }
+        .timeline-step.completed .timeline-icon { background: #48bb78; border-color: #48bb78; color: white; }
+        .timeline-step.active .timeline-icon { border: 3px solid #38a169; background: #ffffff; }
+        .timeline-step.active .timeline-icon::after { content: ''; width: 14px; height: 14px; background: #38a169; border-radius: 50%; }
+
+        .timeline-title { font-size: 17px; font-weight: 600; color: #718096; }
+        .timeline-step.completed .timeline-title,
+        .timeline-step.active .timeline-title { color: #1a202c; }
+
+        .timeline-description { font-size: 14px; color: #4a5568; margin-top: 8px; line-height: 1.5; background: #ffffff; padding: 14px; border-radius: 6px; border: 1px solid #e2e8f0; }
+
+        /* Footer Links Section */
+        .wu-footer { margin-top: auto; padding: 25px 16px; background-color: #ffffff; border-top: 1px solid #e2e8f0; text-align: center; font-size: 12px; color: #718096; }
+        .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 12px; margin-bottom: 15px; line-height: 1.6; }
+        .footer-links a { color: #4a5568; text-decoration: none; }
+        .footer-copyright { margin-bottom: 15px; color: #a0aec0; }
+        .social-icons { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
+        .social-icons a { color: #1a202c; font-weight: bold; text-decoration: none; font-size: 16px; }
+
+        .loading-spinner { display: none; text-align: center; padding: 20px; color: #2b80b9; font-weight: bold; }
+    </style>
+<link href="../../wp-content/uploads/2024/05/favicon.webp" rel="icon" sizes="32x32"/>
+<link href="../../wp-content/uploads/2024/05/favicon.webp" rel="icon" sizes="192x192"/>
+<link href="../../wp-content/uploads/2024/05/favicon.webp" rel="apple-touch-icon"/>
+<meta content="../../wp-content/uploads/2024/05/favicon.webp" name="msapplication-TileImage"/>
+<meta content="https://rayyap.com/ku/western-union/track-transfer.html" property="og:url"/>
+<meta content="website" property="og:type"/>
+<meta content="شوێنکەوتنی حەواڵەی وێسترن یونیۆن بە MTCN | سەرافی ڕەیان" property="og:title"/>
+<meta content="ژمارەی ١٠ ژمارەیی MTCN بەکاربهێنە بۆ پشکنینی دۆخی حەواڵەی وێسترن یونیۆن. مەرجەکانی وەرگرتن بە حەواڵە و شوێنی مەبەستەوە پەیوەستن." property="og:description"/>
+<meta content="سەرافی ڕەیان" property="og:site_name">
+<meta content="https://rayyap.com/wp-content/uploads/2024/05/ww1.webp" property="og:image"/>
+<meta content="ku_IQ" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="شوێنکەوتنی حەواڵەی وێسترن یونیۆن بە MTCN | سەرافی ڕەیان" name="twitter:title"/>
+<meta content="ژمارەی ١٠ ژمارەیی MTCN بەکاربهێنە بۆ پشکنینی دۆخی حەواڵەی وێسترن یونیۆن. مەرجەکانی وەرگرتن بە حەواڵە و شوێنی مەبەستەوە پەیوەستن." name="twitter:description"/>
+<meta content="https://rayyap.com/wp-content/uploads/2024/05/ww1.webp" name="twitter:image"/>
+<meta content="ku-IQ" name="content-language"/><meta content="IQ" name="geo.region"/><meta content="Iraq" name="geo.placename"/><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://rayyap.com/ku/western-union/track-transfer.html","url":"https://rayyap.com/ku/western-union/track-transfer.html","name":"Track Western Union Transfer by MTCN | Al Rayyan Exchange","description":"Use the 10-digit MTCN to check a Western Union transfer status. Collection requirements depend on the transfer and destination.","inLanguage":"ku-IQ","isPartOf":{"@type":"WebSite","@id":"https://rayyap.com/#website","url":"https://rayyap.com/ku/western-union/track-transfer.html","name":"Al Rayyan Exchange"},"about":{"@type":"FinancialService","@id":"https://rayyap.com/#organization","name":"Al Rayyan Exchange","areaServed":{"@type":"Country","name":"Iraq"}},"keywords":"شوێنکەوتنی MTCN وێسترن یونیۆن، شوێنکەوتنی گواستنەوەی پارە، دۆخی حەواڵە بە ئۆنلاین"}</script><style id="rayyan-language-switcher-style">
+    .rayyan-language-switcher-container{display:flex;justify-content:center;align-items:center;width:100%;padding:16px 16px 8px;box-sizing:border-box;clear:both;position:relative;z-index:1}
+    .rayyan-language-switcher{font:inherit;position:relative;direction:ltr;text-align:left;z-index:20}
+    .rayyan-language-switcher>summary{list-style:none;cursor:pointer;border:1px solid #d8dee8;border-radius:999px;padding:8px 16px;background:#fff;color:#26374a;font-size:14px;font-weight:600;line-height:1.5;box-shadow:0 2px 8px rgba(20,35,55,.06)}
+    .rayyan-language-switcher>summary::-webkit-details-marker{display:none}
+    .rayyan-language-switcher>summary:after{content:'⌄';margin-inline-start:10px;font-size:13px}
+    .rayyan-language-options{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);min-width:180px;background:#fff;border:1px solid #e1e6ee;border-radius:12px;padding:6px;box-shadow:0 8px 28px rgba(15,35,60,.15);display:flex;flex-direction:column;gap:2px}
+    .rayyan-language-options a{display:block;border-radius:8px;padding:8px 12px;color:#243449;text-decoration:none;font-size:14px;line-height:1.5;white-space:nowrap}
+    .rayyan-language-options a:hover,.rayyan-language-options a:focus{background:#f3f6fa}
+    .rayyan-language-options a.is-current{font-weight:700;background:#eef2f7}
+    .drawer-lang-section .drawer-language-title{font-weight:700;margin:0 0 8px}
+    .drawer-lang-section a{display:inline-block;padding:5px 9px;margin:2px;border-radius:8px;text-decoration:none}
+    .drawer-lang-section a.is-current{font-weight:700;background:#edf2f8}
+    @media(min-width:768px){.rayyan-language-switcher-container{padding-top:20px;padding-bottom:10px}}
+    </style><style id="rayyan-ltr-style">
+    html[lang^="en"],html[lang^="en"] body{direction:ltr}
+    html[lang^="en"] .main-page-wrapper,html[lang^="en"] .main-page-wrapper .elementor-widget-container,html[lang^="en"] .main-page-wrapper p,html[lang^="en"] .main-page-wrapper li,html[lang^="en"] .main-page-wrapper h1,html[lang^="en"] .main-page-wrapper h2,html[lang^="en"] .main-page-wrapper h3,html[lang^="en"] .main-page-wrapper label,html[lang^="en"] .main-page-wrapper summary,html[lang^="en"] .main-page-wrapper input,html[lang^="en"] .main-page-wrapper select,html[lang^="en"] .main-page-wrapper textarea{direction:ltr!important;text-align:left!important}
+    html[lang^="en"] .whb-header,html[lang^="en"] .wd-header-nav,html[lang^="en"] .mobile-nav{direction:ltr!important}
+    html[lang^="en"] .rayyan-language-switcher-container{direction:ltr}
+    </style><link href="https://rayyap.com/ku/western-union/track-transfer.html" rel="canonical"/><link href="https://rayyap.com/westernunion/track-transfer.html" hreflang="en-IQ" rel="alternate"/><link href="https://rayyap.com/fa/western-union/track-transfer.html" hreflang="fa-IQ" rel="alternate"/><link href="https://rayyap.com/ku/western-union/track-transfer.html" hreflang="ku-IQ" rel="alternate"/><link href="https://rayyap.com/westernunion/track-transfer.html" hreflang="x-default" rel="alternate"/><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://rayyap.com/ku/western-union/track-transfer.html#webpage","url":"https://rayyap.com/ku/western-union/track-transfer.html","name":"شوێنکەوتنی حەواڵەی وێسترن یونیۆن بە MTCN | سەرافی ڕەیان","description":"ژمارەی ١٠ ژمارەیی MTCN بەکاربهێنە بۆ پشکنینی دۆخی حەواڵەی وێسترن یونیۆن. مەرجەکانی وەرگرتن بە حەواڵە و شوێنی مەبەستەوە پەیوەستن.","inLanguage":"ku-IQ","isPartOf":{"@type":"WebSite","@id":"https://rayyap.com/#website","url":"https://rayyap.com/","name":"سەرافی ڕەیان"},"about":{"@type":"FinancialService","@id":"https://rayyap.com/#organization","name":"سەرافی ڕەیان","areaServed":{"@type":"Country","name":"Iraq"}},"keywords":"شوێنکەوتنی MTCN وێسترن یونیۆن، شوێنکەوتنی گواستنەوەی پارە، دۆخی حەواڵە بە ئۆنلاین"}</script>
+<style id="seo-a11y-heading-support">
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+.wpforms-field-html h2,.wpforms-field-html h3,.payment-info-box h3{font-size:18px!important;}
+</style>
+</head>
+<body>
+<h1 class="sr-only">شوێکەوتنی حەواڵەی وێسترن یونیۆن بە MTCN</h1>
+
+<!-- Header Navigation -->
+<header class="app-header">
+<button class="back-btn" id="headerBackBtn" onclick="resetToStepOne()">←</button>
+<div class="header-title" id="headerTitle">شوێنکەوتنی گواستنەوە</div>
+<button class="menu-btn">پێڕست</button>
+</header>
+<!-- Sender / Receiver Tabs -->
+<div class="tab-container" id="tabNav">
+<button class="tab-btn active" id="tabSender" onclick="switchTab('sender')">
+<svg viewbox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"></path></svg>
+            من نێرەرم
+        </button>
+<button class="tab-btn" id="tabReceiver" onclick="switchTab('receiver')">
+<svg viewbox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"></path></svg>
+            من وەرگرم
+        </button>
+</div>
+<!-- Main Content Area -->
+<main class="content-area">
+<!-- STEP 1: INPUT FORM -->
+<div id="step-input-form">
+<p class="form-instruction">بۆ شوێنکەوتنی گواستنەوە، ژمارەی ١٠ ژمارەیی شوێکەوتن (MTCN) بنووسە:</p>
+<div class="input-group">
+<input autocomplete="off" class="custom-input mtcn-formatted-input" id="mtcnInput" maxlength="12" oninput="formatMTCN(this)" placeholder="___-___-____" type="text"/>
+</div>
+<div class="input-group">
+<input class="custom-input" id="senderNameInput" placeholder="ناوی نێرەر" type="text"/>
+</div>
+<a class="find-mtcn-link">MTCN لە کوێ بدۆزمەوە؟</a>
+<div class="loading-spinner" id="loadingText">لە تۆمارەکانی گواستنەوەدا دەگەڕێت...</div>
+<div class="btn-next-container">
+<button class="btn-next" id="nextBtn" onclick="trackTransfer()">دواتر</button>
+</div>
+</div>
+<!-- STEP 2: TRANSFER STATUS RESULTS -->
+<div id="step-status-view">
+<div class="status-header-card">
+<div class="mtcn-label">ژمارەی شوێکەوتن (MTCN):</div>
+<div class="mtcn-value" id="displayMTCN">652-366-7704</div>
+</div>
+<!-- Status Timeline Flow -->
+<div class="timeline">
+<div class="timeline-step completed" id="stepSent">
+<div class="timeline-icon">✓</div>
+<div class="timeline-title">نێردرا</div>
+</div>
+<div class="timeline-step completed" id="stepInProgress">
+<div class="timeline-icon">✓</div>
+<div class="timeline-title">لە پڕۆسەدایە</div>
+</div>
+<div class="timeline-step active" id="stepAvailable">
+<div class="timeline-icon"></div>
+<div class="timeline-title">بەردەستە</div>
+<div class="timeline-description" id="stepDescription">
+                        حەواڵەکە ئامادەی وەرگرتنە. وەرگر دەبێت بەڵگەی ناسنامەی قبوڵکراوی حکومی و ژمارەی MTCN ببەێت بۆ شوێنی نوێنەرایەتی وێسترن یونیۆن.
+                    </div>
+</div>
+<div class="timeline-step" id="stepReceived">
+<div class="timeline-icon"></div>
+<div class="timeline-title">وەرگیرا</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Links -->
+<div class="rayyan-language-switcher-container"><details class="rayyan-language-switcher"><summary>گۆڕینی زمان</summary><div class="rayyan-language-options"><a href="../../westernunion/track.html" lang="ar">العربية</a><a href="../../westernunion/track-transfer.html" lang="en">English</a><a href="../../fa/western-union/track-transfer.html" lang="fa">فارسی</a><a aria-current="page" class="is-current" href="../../ku/western-union/track-transfer.html" lang="ku">کوردی</a></div></details></div><footer class="wu-footer">
+<div class="footer-links">
+<a href="../../ku/index.html">ماڵەوە</a> | <a href="../../ku/about-us.html">دەربارەی ئێمە</a>
+</div>
+<div class="footer-copyright">
+            © ٢٠٢٦ Western Union Holdings, Inc. هەموو مافەکان پارێزراون
+        </div>
+<div class="social-icons">
+</div>
+</footer>
+<!-- زر الواتساب -->
+<div class="ht-ctc ht-ctc-chat ctc-analytics ctc_wp_desktop style-3" id="ht-ctc-chat" style="position: fixed; bottom: 15px; right: 15px; z-index: 999999; cursor: pointer;">
+<div class="ht_ctc_style ht_ctc_chat_style">
+<div class="ctc_s_3 ctc_nb" style="display:flex;justify-content:center;align-items:center;flex-direction:row-reverse;" title="واتساپ">
+<svg height="50px" style="pointer-events:none; display:block; height:50px; width:50px;" viewbox="0 0 1219.547 1225.016" width="50px">
+<path d="M1041.858 178.02C927.206 63.289 774.753.07 612.325 0 277.617 0 5.232 272.298 5.098 606.991c-.039 106.986 27.915 211.42 81.048 303.476L0 1225.016l321.898-84.406c88.689 48.368 188.547 73.855 290.166 73.896h.258.003c334.654 0 607.08-272.346 607.222-607.023.056-162.208-63.052-314.724-177.689-429.463zm-429.533 933.963h-.197c-90.578-.048-179.402-24.366-256.878-70.339l-18.438-10.93-191.021 50.083 51-186.176-12.013-19.087c-50.525-80.336-77.198-173.175-77.16-268.504.111-278.186 226.507-504.503 504.898-504.503 134.812.056 261.519 52.604 356.814 147.965 95.289 95.36 147.728 222.128 147.688 356.948-.118 278.195-226.522 504.543-504.693 504.543z" fill="#E0E0E0" style="fill: #E0E0E0;"></path>
+<lineargradient gradientunits="userSpaceOnUse" id="htwaicona-chat" x1="609.77" x2="609.77" y1="1190.114" y2="21.084">
+<stop offset="0" stop-color="#20b038"></stop>
+<stop offset="1" stop-color="#60d66a"></stop>
+</lineargradient>
+<path d="M27.875 1190.114l82.211-300.18c-50.719-87.852-77.391-187.523-77.359-289.602.133-319.398 260.078-579.25 579.469-579.25 155.016.07 300.508 60.398 409.898 169.891 109.414 109.492 169.633 255.031 169.57 409.812-.133 319.406-260.094 579.281-579.445 579.281-.023 0 .016 0 0 0h-.258c-96.977-.031-192.266-24.375-276.898-70.5l-307.188 80.548z" fill="url(#htwaicona-chat)" style="fill: url(#htwaicona-chat);"></path>
+<path clip-rule="evenodd" d="M462.273 349.294c-11.234-24.977-23.062-25.477-33.75-25.914-8.742-.375-18.75-.352-28.742-.352-10 0-26.25 3.758-39.992 18.766-13.75 15.008-52.5 51.289-52.5 125.078 0 73.797 53.75 145.102 61.242 155.117 7.5 10 103.758 166.266 256.203 226.383 126.695 49.961 152.477 40.023 179.977 37.523s88.734-36.273 101.234-71.297c12.5-35.016 12.5-65.031 8.75-71.305-3.75-6.25-13.75-10-28.75-17.5s-88.734-43.789-102.484-48.789-23.75-7.5-33.75 7.516c-10 15-38.727 48.773-47.477 58.773-8.75 10.023-17.5 11.273-32.5 3.773-15-7.523-63.305-23.344-120.609-74.438-44.586-39.75-74.688-88.844-83.438-103.859-8.75-15-.938-23.125 6.586-30.602 6.734-6.719 15-17.508 22.5-26.266 7.484-8.758 9.984-15.008 14.984-25.008 5-10.016 2.5-18.773-1.25-26.273s-32.898-81.67-46.234-111.326z" fill="#FFF" fill-rule="evenodd" style="fill: #FFFFFF;"></path>
+</svg>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const waBtn = document.getElementById('ht-ctc-chat');
+    if (waBtn) {
+        waBtn.addEventListener('click', function() {
+            const phoneNumber = "9647839803126";
+            const message = encodeURIComponent("سڵاو کۆمپانیای سەرافی ڕەیان");
+            window.open('https://wa.me/' + phoneNumber + '?text=' + message, '_blank');
+        });
+    }
+});
+</script>
+<!-- JavaScript Handling & Google Script API Connection -->
+<script>
+        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbxL99luGVkFdC3jgLzN0uQ463Hri7riiRR0dCa3e5ZPg07m0-14BisSUKdFdI1_Z46u/exec';
+
+        // Format MTCN input as XXX-XXX-XXXX
+        function formatMTCN(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.slice(0, 10);
+            
+            let formatted = '';
+            if (value.length > 0) formatted += value.substring(0, 3);
+            if (value.length > 3) formatted += '-' + value.substring(3, 6);
+            if (value.length > 6) formatted += '-' + value.substring(6, 10);
+
+            input.value = formatted;
+        }
+
+        function switchTab(role) {
+            document.getElementById('tabSender').classList.remove('active');
+            document.getElementById('tabReceiver').classList.remove('active');
+            if (role === 'sender') {
+                document.getElementById('tabSender').classList.add('active');
+            } else {
+                document.getElementById('tabReceiver').classList.add('active');
+            }
+        }
+
+        function trackTransfer() {
+            const rawMTCN = document.getElementById('mtcnInput').value.replace(/\D/g, '');
+            const senderName = document.getElementById('senderNameInput').value.trim();
+            const loading = document.getElementById('loadingText');
+
+            if (rawMTCN.length !== 10) {
+                alert('تکایە ژمارەی MTCN ـی ١٠ ژمارەیی دروست بنووسە.');
+                return;
+            }
+
+            loading.style.display = 'block';
+
+            fetch(googleScriptUrl + '?query=' + encodeURIComponent(rawMTCN))
+            .then(res => res.json())
+            .then(data => {
+                loading.style.display = 'none';
+                if (data.found) {
+                    showStatusView(rawMTCN, data);
+                } else {
+                    alert('هیچ تۆمارێکی حەواڵە بەو ژمارەی MTCN ـە نەدۆزرایەوە. تکایە ژمارەکە بپشکنە و دووبارە هەوڵ بدەوە.');
+                }
+            })
+            .catch(err => {
+                loading.style.display = 'none';
+                alert('لە پەیوەندیکردن بە خزمەتگوزاری شوێنکەوتن هەڵەیەک ڕوویدا؛ تکایە دووبارە هەوڵ بدەوە.');
+            });
+        }
+
+        function showStatusView(rawMTCN, data) {
+            // Format MTCN display
+            const formatted = rawMTCN.substring(0, 3) + '-' + rawMTCN.substring(3, 6) + '-' + rawMTCN.substring(6, 10);
+            document.getElementById('displayMTCN').innerText = formatted;
+
+            // Update UI Views
+            document.getElementById('step-input-form').style.display = 'none';
+            document.getElementById('tabNav').style.display = 'none';
+            document.getElementById('step-status-view').style.display = 'block';
+            document.getElementById('headerTitle').innerText = 'دۆخی حەواڵە';
+
+            // Dynamic Step Updates based on Status from Google Sheet
+            const status = (data.status || '').toLowerCase();
+
+            // Default State: Available
+            resetTimeline();
+            if (status.includes('received') || status.includes('مستلم')) {
+                setTimelineStep('Received');
+            } else if (status.includes('progress') || status.includes('لە چاوەڕوانیدایە')) {
+                setTimelineStep('In progress');
+            } else {
+                setTimelineStep('Available'); // Default active step
+            }
+        }
+
+        function resetTimeline() {
+            document.querySelectorAll('.timeline-step').forEach(step => {
+                step.classList.remove('completed', 'active');
+            });
+        }
+
+        function setTimelineStep(stepName) {
+            const stepSent = document.getElementById('stepSent');
+            const stepInProgress = document.getElementById('stepInProgress');
+            const stepAvailable = document.getElementById('stepAvailable');
+            const stepReceived = document.getElementById('stepReceived');
+
+            if (stepName === 'Available') {
+                stepSent.className = 'timeline-step completed';
+                stepInProgress.className = 'timeline-step completed';
+                stepAvailable.className = 'timeline-step active';
+                stepReceived.className = 'timeline-step';
+            } else if (stepName === 'Received') {
+                stepSent.className = 'timeline-step completed';
+                stepInProgress.className = 'timeline-step completed';
+                stepAvailable.className = 'timeline-step completed';
+                stepReceived.className = 'timeline-step active';
+            } else if (stepName === 'In progress') {
+                stepSent.className = 'timeline-step completed';
+                stepInProgress.className = 'timeline-step active';
+                stepAvailable.className = 'timeline-step';
+                stepReceived.className = 'timeline-step';
+            }
+        }
+
+        function resetToStepOne() {
+            document.getElementById('step-status-view').style.display = 'none';
+            document.getElementById('step-input-form').style.display = 'block';
+            document.getElementById('tabNav').style.display = 'flex';
+            document.getElementById('headerTitle').innerText = 'شوێنکەوتنی حەواڵە';
+        }
+    </script>
+</body>
+</html>

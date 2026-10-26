@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html dir="rtl" id="htmlRoot" lang="ku">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title id="pageTitle">شوێنکەوتنی داواکاری گواستنەوە | سەرافی ڕەیان</title>
+<!-- تحسين محركات البحث (SEO) ومحركات الذكاء الاصطناعي -->
+<meta content="زانیاری شوێنکەوتنی بەردەست بەکاربهێنە بۆ پشکنینی داواکاری گواستنەوە. ژمارەی شوێکەوتن و زانیاری کەسی بە نهێنی بپارێزە." name="description"/>
+<link href="../../wp-content/themes/woodmart/css/bootstrap-light.min8c10.css" id="bootstrap-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="../../wp-content/themes/woodmart/css/parts/base-rtl.min8c10.css" id="woodmart-style-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="../../wp-content/plugins/elementor/assets/css/frontend-lite-rtl.min3cad.css" id="elementor-frontend-css" media="all" rel="stylesheet" type="text/css"/>
+<style>
+        body { font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
+
+        /* هيدر الشعارات والقائمة */
+        .whb-main-header { background: #fff; border-bottom: 1px solid rgba(129, 129, 129, 0.2); padding: 12px 0; }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .logos-wrapper { display: flex; align-items: center; gap: 15px; }
+        .site-logo img { max-width: 160px; height: auto; display: block; }
+        .wu-logo img { max-width: 110px; height: auto; display: block; }
+
+        .main-nav { display: flex; list-style: none; gap: 20px; margin: 0; padding: 0; align-items: center; }
+        .main-nav li a { color: #333; text-decoration: none; font-weight: 600; font-size: 14px; transition: color 0.2s; }
+        .main-nav li a:hover { color: #0a8f6e; }
+
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: #333; }
+
+        .page-title { background-color: #0a8f6e; padding: 30px 0; text-align: center; color: #fff; margin-bottom: 30px; box-shadow: inset 0 -3px 0 rgba(0,0,0,0.1); }
+        .page-title h1 { margin: 0; font-size: 26px; font-weight: bold; color: #fff; }
+
+        .container { max-width: 600px; margin: 0 auto 50px auto; padding: 0 15px; }
+        .track-box { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .search-area { display: flex; gap: 10px; margin: 20px 0; }
+        .search-area input { flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; text-align: center; direction: ltr; outline: none; }
+        .search-area input:focus { border-color: #0a8f6e; }
+        .search-area button { padding: 12px 25px; background: #0a8f6e; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; }
+        .search-area button:hover { background: #076d53; }
+
+        .status-card { border: 1px solid #e2e8f0; background: #f8fafc; padding: 20px; border-radius: 8px; display: none; margin-top: 20px; text-align: right; }
+        .status-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #cbd5e0; font-size: 15px; }
+        .status-row:last-child { border-bottom: none; }
+        .badge { padding: 4px 12px; border-radius: 15px; font-weight: bold; color: #fff; font-size: 13px; background: #ffc107; }
+        
+        /* زر إظهار رقم الحوالة MTCN عند الموافقة */
+        .show-mtcn-btn { background: #28a745; color: white; padding: 12px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; width: 100%; font-size: 15px; display: none; transition: background 0.2s; }
+        .show-mtcn-btn:hover { background: #218838; }
+
+        /* تنسيق النافذة المنبثقة (Modal) المطابقة لصورة وسترن يونيون تماماً */
+        .wu-modal-overlay {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: none; justify-content: center; align-items: center;
+            z-index: 999999; padding: 15px;
+        }
+        .wu-modal-card {
+            background: #ffffff; width: 100%; max-width: 380px;
+            border-radius: 12px; padding: 30px 20px 25px 20px;
+            position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .wu-close-btn {
+            position: absolute; top: 12px; right: 15px;
+            font-size: 22px; color: #a0aec0; cursor: pointer;
+            font-weight: bold; border: none; background: none;
+        }
+        .wu-success-icon {
+            width: 60px; height: 60px; border: 3px solid #7ed321;
+            border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; margin: 0 auto 15px auto;
+        }
+        .wu-success-icon::after {
+            content: ''; width: 12px; height: 22px;
+            border: solid #7ed321; border-width: 0 3.5px 3.5px 0;
+            transform: rotate(45deg); margin-bottom: 4px;
+        }
+        .wu-modal-title { font-size: 18px; font-weight: 700; color: #2d3748; margin-bottom: 4px; }
+        .wu-modal-subtitle { font-size: 14px; color: #a0aec0; margin-bottom: 20px; }
+        .wu-divider { border-top: 1px solid #edf2f7; margin: 15px 0; }
+        .wu-details-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 15px; }
+        .wu-details-label { color: #718096; font-weight: 600; }
+        .wu-details-value { color: #2d3748; font-weight: 700; direction: ltr; }
+
+        /* القائمة الجانبية للموبايل */
+        .mobile-drawer { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: #fff; z-index: 99999; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; }
+        .mobile-drawer.active { right: 0; }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
+        .close-drawer { background: none; border: none; font-size: 22px; cursor: pointer; }
+        .mobile-nav-list { list-style: none; padding: 0; margin: 0; }
+        .mobile-nav-list li { margin-bottom: 15px; }
+        .mobile-nav-list li a { color: #333; text-decoration: none; font-weight: 600; font-size: 16px; display: block; }
+        
+        .drawer-lang-section { border-top: 1px solid #eee; padding-top: 15px; margin-top: auto; }
+        .drawer-lang-section label { display: block; font-weight: bold; font-size: 13px; margin-bottom: 8px; color: #666; }
+        .drawer-lang-section select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-weight: bold; background: #f9f9f9; cursor: pointer; }
+
+        .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9998; display: none; }
+        .drawer-overlay.active { display: block; }
+
+        .footer-container { background: #222; color: #aaa; padding: 20px 0; text-align: center; font-size: 13px; margin-top: 40px; }
+        .footer-container a { color: #fff; text-decoration: none; }
+
+        @media (max-width: 992px) {
+            .main-nav { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+
+        @media print {
+            body * { visibility: hidden; }
+            #wuReceiptModal, #wuReceiptModal * { visibility: visible; }
+            #wuReceiptModal { position: absolute; top: 0; right: 0; width: 100%; height: 100%; background: white; display: flex !important; }
+            .wu-close-btn { display: none !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+<link href="../../wp-content/uploads/2024/05/favicon.webp" rel="icon" sizes="32x32"/>
+<link href="../../wp-content/uploads/2024/05/favicon.webp" rel="icon" sizes="192x192"/>
+<link href="../../wp-content/uploads/2024/05/favicon.webp" rel="apple-touch-icon"/>
+<meta content="../../wp-content/uploads/2024/05/favicon.webp" name="msapplication-TileImage"/>
+<meta content="https://rayyap.com/ku/western-union/track-order.html" property="og:url"/>
+<meta content="website" property="og:type"/>
+<meta content="شوێنکەوتنی داواکاری گواستنەوە | سەرافی ڕەیان" property="og:title"/>
+<meta content="زانیاری شوێنکەوتنی بەردەست بەکاربهێنە بۆ پشکنینی داواکاری گواستنەوە. ژمارەی شوێکەوتن و زانیاری کەسی بە نهێنی بپارێزە." property="og:description"/>
+<meta content="سەرافی ڕەیان" property="og:site_name"/>
+<meta content="https://rayyap.com/wp-content/uploads/2024/05/ww1.webp" property="og:image"/>
+<meta content="ku_IQ" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="شوێنکەوتنی داواکاری گواستنەوە | سەرافی ڕەیان" name="twitter:title"/>
+<meta content="زانیاری شوێنکەوتنی بەردەست بەکاربهێنە بۆ پشکنینی داواکاری گواستنەوە. ژمارەی شوێکەوتن و زانیاری کەسی بە نهێنی بپارێزە." name="twitter:description"/>
+<meta content="https://rayyap.com/wp-content/uploads/2024/05/ww1.webp" name="twitter:image"/>
+<meta content="ku-IQ" name="content-language"/><meta content="IQ" name="geo.region"/><meta content="Iraq" name="geo.placename"/><meta content="شوێنکەوتنی داواکاری گواستنەوە، دۆخی داواکاری وێسترن یونیۆن، شوێنکەوتنی MTCN" name="keywords"/><link href="https://rayyap.com/ku/western-union/track-order.html" rel="canonical"><link href="https://rayyap.com/westernunion/track-order.html" hreflang="ar-IQ" rel="alternate"/><link href="https://rayyap.com/en/western-union/track-order.html" hreflang="en-IQ" rel="alternate"/><link href="https://rayyap.com/fa/western-union/track-order.html" hreflang="fa-IQ" rel="alternate"/><link href="https://rayyap.com/ku/western-union/track-order.html" hreflang="ku-IQ" rel="alternate"/><link href="https://rayyap.com/westernunion/track-order.html" hreflang="x-default" rel="alternate"/><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://rayyap.com/ku/western-union/track-order.html#webpage","url":"https://rayyap.com/ku/western-union/track-order.html","name":"شوێنکەوتنی داواکاری گواستنەوە | سەرافی ڕەیان","description":"زانیاری شوێنکەوتنی بەردەست بەکاربهێنە بۆ پشکنینی داواکاری گواستنەوە. ژمارەی شوێکەوتن و زانیاری کەسی بە نهێنی بپارێزە.","inLanguage":"ku-IQ","isPartOf":{"@type":"WebSite","@id":"https://rayyap.com/#website","url":"https://rayyap.com/","name":"سەرافی ڕەیان"},"about":{"@type":"FinancialService","@id":"https://rayyap.com/#organization","name":"سەرافی ڕەیان","areaServed":{"@type":"Country","name":"Iraq"}},"keywords":"شوێنکەوتنی داواکاری گواستنەوە، دۆخی داواکاری وێسترن یونیۆن، شوێنکەوتنی MTCN"}</script></head>
+<body class="rtl page-template-default page wrapper-custom">
+<div class="website-wrapper">
+<!-- الهيدر -->
+<header class="whb-header whb-default_header no-print">
+<div class="whb-main-header">
+<div class="header-container">
+<div class="logos-wrapper">
+<div class="site-logo">
+<a class="wd-logo wd-main-logo" href="../../ku/index.html" rel="home">
+<img alt="سەرافی ڕەیان" src="../../wp-content/uploads/2024/05/rayyanlogo.png" width="800" height="200" />
+</a>
+</div>
+<div class="wu-logo">
+<img alt="Western Union" src="../../wp-content/uploads/2024/05/Westr.png" width="2000" height="1125" />
+</div>
+</div>
+<ul class="main-nav">
+<li><a href="../../ku/index.html" id="menuHome">سەرەکی</a></li>
+<li><a href="../../ku/traveler-dollar-reservation.html" id="menuUSD">داواکاری دۆلار بۆ گەشتیاران</a></li>
+<li><a href="../../ku/western-union/" id="menuWU">ناردنی پارە بە وێسترن یونیۆن</a></li>
+<li><a href="../../ku/track.html">شوێنکەوتنی دۆخی داواکاری</a></li>
+<li><a href="../../ku/western-union/track-transfer.html">شوێنکەوتنی حەواڵەی وێسترن یونیۆن بە ژمارەی MTCN</a></li>
+<li><a href="../../ku/branches-locations.html">لق و شوێنەکانی وەرگرتن</a></li>
+<li><a href="../../ku/faq.html">پرسیارە باوەکان</a></li>
+<li><a href="../../ku/about-us.html">دەربارەی ئێمە</a></li>
+<li><a href="../../ku/privacy-policy.html">سیاسەتی تایبەتمەندی</a></li>
+</ul>
+<button class="mobile-menu-btn" onclick="toggleDrawer()">☰</button>
+</div>
+</div>
+</header>
+<!-- القائمة الجانبية -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+<div>
+<div class="drawer-header">
+<strong>پێڕستی سەرەکی</strong>
+<button class="close-drawer" onclick="toggleDrawer()">✕</button>
+</div>
+<ul class="mobile-nav-list">
+<li><a href="../../ku/index.html" id="mMenuHome">سەرەکی</a></li>
+<li><a href="../../ku/traveler-dollar-reservation.html" id="mMenuUSD">داواکاری دۆلار بۆ گەشتیاران</a></li>
+<li><a href="../../ku/western-union/" id="mMenuWU">ناردنی پارە بە وێسترن یونیۆن</a></li>
+<li><a href="../../ku/track.html">شوێنکەوتنی دۆخی داواکاری</a></li>
+<li><a href="../../ku/western-union/track-transfer.html">شوێنکەوتنی حەواڵەی وێسترن یونیۆن بە ژمارەی MTCN</a></li>
+<li><a href="../../ku/branches-locations.html">لق و شوێنەکانی وەرگرتن</a></li>
+<li><a href="../../ku/faq.html">پرسیارە باوەکان</a></li>
+<li><a href="../../ku/about-us.html">دەربارەی ئێمە</a></li>
+<li><a href="../../ku/privacy-policy.html">سیاسەتی تایبەتمەندی</a></li>
+</ul>
+</div>
+<div class="drawer-lang-section"><p class="drawer-language-title">زمان هەڵبژێرە</p><a href="../../westernunion/track-order.html" lang="ar">العربية</a><a href="../../en/western-union/track-order.html" lang="en">English</a><a href="../../fa/western-union/track-order.html" lang="fa">فارسی</a><a aria-current="page" class="is-current" href="../../ku/western-union/track-order.html" lang="ku">کوردی</a></div>
+</div>
+<!-- عنوان الصفحة -->
+<div class="page-title no-print">
+<div class="container" style="margin: 0 auto; max-width: 1200px;">
+<h1 class="entry-title title" id="pageMainTitle">شوێنکەوتنی گواستنەوەکەت</h1>
+</div>
+</div>
+<!-- المحتوى الرئيسي -->
+<div class="container">
+<div class="track-box">
+<h2 id="txtHeader" style="text-align: center; color: #1a202c; font-size: 20px; margin-bottom: 5px;">شوێنکەوتنی گواستنەوەی وێسترن یونیۆن</h2>
+<p id="txtSub" style="text-align: center; color: #718096; font-size: 13px; margin-bottom: 20px;">ژمارەی شوێکەوتن (MTCN) یان ژمارەی تەلەفۆن بنووسە بۆ پشکنینی وردەکارییەکان</p>
+<div class="search-area no-print">
+<input id="trackInput" placeholder="MTxxxxxxxx یان ژمارەی تەلەفۆن" type="text"/>
+<button id="searchBtn" onclick="checkStatus()">گەڕان</button>
+</div>
+<div id="loadingText" style="text-align: center; color: #718096; display: none; margin: 15px 0;">لە تۆمارەکاندا دەگەڕێت...</div>
+<!-- بطاقة تفاصيل الطلب العادية -->
+<div class="status-card" id="statusCard">
+<div class="status-row">
+<span id="labelCode">ژمارەی شوێکەوتن / سیستەم:</span>
+<strong id="resCode" style="direction: ltr;">-</strong>
+</div>
+<div class="status-row">
+<span id="labelPhone">ژمارەی تەلەفۆن:</span>
+<span id="resPhone" style="direction: ltr;">-</span>
+</div>
+<div class="status-row">
+<span id="labelSender">ناوی نێرەر:</span>
+<span id="resSender">-</span>
+</div>
+<div class="status-row">
+<span id="labelReceiver">ناوی وەرگر:</span>
+<span id="resReceiver">-</span>
+</div>
+<div class="status-row">
+<span id="labelFrom">لە وڵاتی:</span>
+<span id="resFromCountry">-</span>
+</div>
+<div class="status-row">
+<span id="labelTo">بۆ وڵاتی:</span>
+<span id="resToCountry">-</span>
+</div>
+<div class="status-row">
+<span id="labelAmount">بڕ ($):</span>
+<strong id="resAmount">-</strong>
+</div>
+<div class="status-row">
+<span id="labelPayMethod">شێوازی پارەدان:</span>
+<span id="resPayMethod">-</span>
+</div>
+<div class="status-row">
+<span id="labelStatus">دۆخی داواکاری:</span>
+<span class="badge" id="resStatus">-</span>
+</div>
+<!-- زر إظهار رقم الحوالة MTCN (يظهر فقط في حال الموافقة) -->
+<div class="no-print">
+<button class="show-mtcn-btn" id="showMtcnBtn" onclick="openReceiptModal()"> پیشاندانی ژمارەی حەواڵەی MTCN</button>
+</div>
+</div>
+</div>
+</div>
+<!-- النافذة المنبثقة (Modal) لإيصال استلام الحوالة المطابقة للصورة -->
+<div class="wu-modal-overlay" id="wuReceiptModal">
+<div class="wu-modal-card">
+<button class="wu-close-btn" onclick="closeReceiptModal()">✕</button>
+<div class="wu-success-icon"></div>
+<div class="wu-modal-title">وەرگرتنی پارە سەرکەوتوو بوو!</div>
+<div class="wu-modal-subtitle">پسووڵەی گواستنەوەی پارە</div>
+<div class="wu-divider"></div>
+<div class="wu-details-row">
+<span class="wu-details-label">MTCN</span>
+<span class="wu-details-value" id="mMTCN">-</span>
+</div>
+<div class="wu-details-row">
+<span class="wu-details-label">نێرەر</span>
+<span class="wu-details-value" id="mSender">-</span>
+</div>
+<div class="wu-details-row">
+<span class="wu-details-label">بڕ</span>
+<span class="wu-details-value" id="mAmount">-</span>
+</div>
+<div class="wu-divider"></div>
+<div class="wu-details-row">
+<span class="wu-details-label">دۆخ</span>
+<span class="wu-details-value" id="mStatus" style="color:#28a745;">تەواو بوو</span>
+</div>
+<button class="print-btn" onclick="window.print()" style="margin-top:20px;">🖨️ چاپکردنی پسووڵە</button>
+</div>
+</div>
+<!-- الفوتر -->
+<footer class="footer-container no-print">
+<div class="container" style="margin: 0 auto;">
+<small>
+  All rights reserved to
+  <a href="../../ku/index.html">Al Rayyan Exchange</a>
+  2026 | Developed by ASH
+</small>
+</div>
+</footer>
+</div>
+<!-- زر واتساب -->
+<div class="ht-ctc ht-ctc-chat ctc-analytics ctc_wp_desktop style-3" id="ht-ctc-chat" style="position: fixed; bottom: 15px; right: 15px; z-index: 999999; cursor: pointer;">
+<div class="ht_ctc_style ht_ctc_chat_style">
+<div class="ctc_s_3 ctc_nb" style="display:flex;justify-content:center;align-items:center;flex-direction:row-reverse;" title="واتساپ">
+<svg height="50px" style="pointer-events:none; display:block; height:50px; width:50px;" viewbox="0 0 1219.547 1225.016" width="50px">
+<path d="M1041.858 178.02C927.206 63.289 774.753.07 612.325 0 277.617 0 5.232 272.298 5.098 606.991c-.039 106.986 27.915 211.42 81.048 303.476L0 1225.016l321.898-84.406c88.689 48.368 188.547 73.855 290.166 73.896h.258.003c334.654 0 607.08-272.346 607.222-607.023.056-162.208-63.052-314.724-177.689-429.463zm-429.533 933.963h-.197c-90.578-.048-179.402-24.366-256.878-70.339l-18.438-10.93-191.021 50.083 51-186.176-12.013-19.087c-50.525-80.336-77.198-173.175-77.16-268.504.111-278.186 226.507-504.503 504.898-504.503 134.812.056 261.519 52.604 356.814 147.965 95.289 95.36 147.728 222.128 147.688 356.948-.118 278.195-226.522 504.543-504.693 504.543z" fill="#E0E0E0" style="fill: #E0E0E0;"></path>
+<lineargradient gradientunits="userSpaceOnUse" id="htwaicona-chat" x1="609.77" x2="609.77" y1="1190.114" y2="21.084">
+<stop offset="0" stop-color="#20b038"></stop>
+<stop offset="1" stop-color="#60d66a"></stop>
+</lineargradient>
+<path d="M27.875 1190.114l82.211-300.18c-50.719-87.852-77.391-187.523-77.359-289.602.133-319.398 260.078-579.25 579.469-579.25 155.016.07 300.508 60.398 409.898 169.891 109.414 109.492 169.633 255.031 169.57 409.812-.133 319.406-260.094 579.281-579.445 579.281-.023 0 .016 0 0 0h-.258c-96.977-.031-192.266-24.375-276.898-70.5l-307.188 80.548z" fill="url(#htwaicona-chat)" style="fill: url(#htwaicona-chat);"></path>
+<path clip-rule="evenodd" d="M462.273 349.294c-11.234-24.977-23.062-25.477-33.75-25.914-8.742-.375-18.75-.352-28.742-.352-10 0-26.25 3.758-39.992 18.766-13.75 15.008-52.5 51.289-52.5 125.078 0 73.797 53.75 145.102 61.242 155.117 7.5 10 103.758 166.266 256.203 226.383 126.695 49.961 152.477 40.023 179.977 37.523s88.734-36.273 101.234-71.297c12.5-35.016 12.5-65.031 8.75-71.305-3.75-6.25-13.75-10-28.75-17.5s-88.734-43.789-102.484-48.789-23.75-7.5-33.75 7.516c-10 15-38.727 48.773-47.477 58.773-8.75 10.023-17.5 11.273-32.5 3.773-15-7.523-63.305-23.344-120.609-74.438-44.586-39.75-74.688-88.844-83.438-103.859-8.75-15-.938-23.125 6.586-30.602 6.734-6.719 15-17.508 22.5-26.266 7.484-8.758 9.984-15.008 14.984-25.008 5-10.016 2.5-18.773-1.25-26.273s-32.898-81.67-46.234-111.326z" fill="#FFF" fill-rule="evenodd" style="fill: #FFFFFF;"></path>
+</svg>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const waBtn = document.getElementById('ht-ctc-chat');
+    if (waBtn) {
+        waBtn.addEventListener('click', function() {
+            const phoneNumber = "9647839803126";
+            const message = encodeURIComponent("سڵاو کۆمپانیای سەرافی ڕەیان");
+            window.open('https://wa.me/' + phoneNumber + '?text=' + message, '_blank');
+        });
+    }
+});
+</script>
+<!-- البرمجية (Script) -->
+<script>
+        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbxL99luGVkFdC3jgLzN0uQ463Hri7riiRR0dCa3e5ZPg07m0-14BisSUKdFdI1_Z46u/exec';
+
+        let currentOrderData = null; // لتخزين بيانات الطلب الحالي
+
+        function toggleDrawer() {
+            document.getElementById('mobileDrawer').classList.toggle('active');
+            document.getElementById('drawerOverlay').classList.toggle('active');
+        }
+
+        const translations = {
+            ar: {
+                title: "تأكيد الطلب – الريان للصرافة",
+                mainTitle: "تأكيد الطلب",
+                home: "الرئيسية",
+                wuNav: "إرسال الأموال مع Western Union أونلاين",
+                usdNav: "حجز دولار للمسافرين",
+                accNav: "حسابات المنصة",
+                appNav: "تحميل التطبيق",
+                langText: "اختر اللغة:",
+                header: "تتبع وتأكيد الحجز",
+                sub: "أدخل رقم التتبع أو رقم الهاتف للتحقق من تفاصيل الطلب",
+                placeholder: "MTxxxxxxxx أو رقم الهاتف",
+                search: "بحث",
+                loading: "جاري البحث في السجلات...",
+                cCode: "رقم التتبع / النظام:",
+                cPhone: "رقم الهاتف:",
+                cSender: "اسم المرسل:",
+                cReceiver: "اسم المستلم:",
+                cFrom: "من دولة:",
+                cTo: "إلى دولة:",
+                cAmount: "المبلغ ($):",
+                cPayMethod: "طريقة الدفع:",
+                cStatus: "حالة الطلب:",
+                showMtcn: " عرض رقم الحوالة MTCN"
+            },
+            en: {
+                title: "Confirm Order – Al-Rayyan Exchange",
+                mainTitle: "Confirm Order",
+                home: "Home",
+                wuNav: "Send Money with Western Union Online",
+                usdNav: "USD Booking for Travelers",
+                accNav: "Platform Accounts",
+                appNav: "Download App",
+                langText: "Select Language:",
+                header: "Track & Confirm Booking",
+                sub: "Enter tracking number or phone number to check details",
+                placeholder: "MTxxxxxxxx or Phone",
+                search: "Search",
+                loading: "Searching records...",
+                cCode: "Tracking No.:",
+                cPhone: "Phone Number:",
+                cSender: "Sender Name:",
+                cReceiver: "Receiver Name:",
+                cFrom: "From Country:",
+                cTo: "To Country:",
+                cAmount: "Amount ($):",
+                cPayMethod: "Payment Method:",
+                cStatus: "Order Status:",
+                showMtcn: " Show MTCN Number"
+            },
+            ku: {
+                title: "پشتڕاستکردنەوەی داواکاری – سەرافی ڕەیان",
+                mainTitle: "پشتڕاستکردنەوەی داواکاری",
+                home: "سەرەکی",
+                wuNav: "ناردنی پارە لەگەڵ Western Union",
+                usdNav: "داواکاری دۆلار بۆ گەشتیاران",
+                accNav: "هەژمارەکانی پلاتفۆرم",
+                appNav: "دابەزاندنی ئەپلیکەیشن",
+                langText: "زمان هەڵبژێرە:",
+                header: "شوێنکەوتن و پشتڕاستکردنەوەی داواکاری",
+                sub: "ژمارەی بەدواداچوون یان ژمارەی مۆبایل بنووسە بۆ پشکنین",
+                placeholder: "MTxxxxxxxx یان ژمارەی مۆبایل",
+                search: "گەڕان",
+                loading: "گەڕان لە تۆمارەکاندا...",
+                cCode: "ژمارەی بەدواداچوون:",
+                cPhone: "ژمارەی مۆبایل:",
+                cSender: "ناوی نێرەر:",
+                cReceiver: "ناوی وەرگر:",
+                cFrom: "لە وڵاتی:",
+                cTo: "بۆ وڵاتی:",
+                cAmount: "بڕی پارە ($):",
+                cPayMethod: "شێوازی پارەدان:",
+                cStatus: "دۆخی داواکاری:",
+                showMtcn: " نیشاندانی ژمارەی MTCN"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('htmlRoot').setAttribute('lang', lang);
+            document.getElementById('htmlRoot').setAttribute('dir', lang === 'en' ? 'ltr' : 'rtl');
+            
+            document.getElementById('pageTitle').innerText = t.title;
+            document.getElementById('pageMainTitle').innerText = t.mainTitle;
+            document.getElementById('langLabel').innerText = t.langText;
+            
+            ['menuHome', 'mMenuHome'].forEach(id => document.getElementById(id).innerText = t.home);
+            ['menuWU', 'mMenuWU'].forEach(id => document.getElementById(id).innerText = t.wuNav);
+            ['menuUSD', 'mMenuUSD'].forEach(id => document.getElementById(id).innerText = t.usdNav);
+
+            document.getElementById('txtHeader').innerText = t.header;
+            document.getElementById('txtSub').innerText = t.sub;
+            document.getElementById('trackInput').placeholder = t.placeholder;
+            document.getElementById('searchBtn').innerText = t.search;
+            document.getElementById('loadingText').innerText = t.loading;
+            
+            document.getElementById('labelCode').innerText = t.cCode;
+            document.getElementById('labelPhone').innerText = t.cPhone;
+            document.getElementById('labelSender').innerText = t.cSender;
+            document.getElementById('labelReceiver').innerText = t.cReceiver;
+            document.getElementById('labelFrom').innerText = t.cFrom;
+            document.getElementById('labelTo').innerText = t.cTo;
+            document.getElementById('labelAmount').innerText = t.cAmount;
+            document.getElementById('labelPayMethod').innerText = t.cPayMethod;
+            document.getElementById('labelStatus').innerText = t.cStatus;
+            document.getElementById('showMtcnBtn').innerText = t.showMtcn;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            if (code) {
+                document.getElementById('trackInput').value = code;
+                checkStatus();
+            }
+        });
+
+        function checkStatus() {
+            const query = document.getElementById('trackInput').value.trim();
+            const loading = document.getElementById('loadingText');
+            const card = document.getElementById('statusCard');
+
+            if (!query) {
+                alert('تکایە ژمارەی شوێنکەوتن، ژمارەی تەلەفۆن یان ژمارەی MTCN بنووسە.');
+                return;
+            }
+
+            loading.style.display = 'block';
+            card.style.display = 'none';
+
+            fetch(googleScriptUrl + '?query=' + encodeURIComponent(query))
+            .then(res => res.json())
+            .then(data => {
+                loading.style.display = 'none';
+                if (data.found) {
+                    currentOrderData = data; // حفظ البيانات للنافذة المنبثقة
+
+                    // إذا بحث العميل مباشرة برقم الـ MTCN (10 أرقام)
+                    if (data.isMTCNQuery || (data.mtcn && query === data.mtcn)) {
+                        openReceiptModalWithData(data);
+                    } else {
+                        // العرض العادي لبطاقة الطلب
+                        document.getElementById('resCode').innerText = data.trackingCode || data.mtcn || 'دیاری نەکراوە';
+                        document.getElementById('resPhone').innerText = data.phone || 'دیاری نەکراوە';
+                        document.getElementById('resSender').innerText = data.sender || 'دیاری نەکراوە';
+                        document.getElementById('resReceiver').innerText = data.receiver || 'دیاری نەکراوە';
+                        document.getElementById('resFromCountry').innerText = data.fromCountry || 'عێراق';
+                        document.getElementById('resToCountry').innerText = data.toCountry || 'دیاری نەکراوە';
+                        document.getElementById('resAmount').innerText = data.amount || '0';
+                        document.getElementById('resPayMethod').innerText = data.payMethod || 'لە چاوەڕوانیدایە';
+
+                        const statusBadge = document.getElementById('resStatus');
+                        const currentStatus = data.status || 'لە چاوەڕوانیدایە';
+                        statusBadge.innerText = currentStatus;
+
+                        const mtcnBtn = document.getElementById('showMtcnBtn');
+
+                        if (currentStatus.includes('مقبول') || currentStatus.includes('تم التأكيد')) {
+                            statusBadge.style.backgroundColor = '#28a745';
+                            // إذا تمت الموافقة وكان هناك رقم MTCN، نظهر زر إظهار رقم الحوالة
+                            if (data.mtcn) {
+                                mtcnBtn.style.display = 'block';
+                            } else {
+                                mtcnBtn.style.display = 'none';
+                            }
+                        } else if (currentStatus.includes('مرفوض')) {
+                            statusBadge.style.backgroundColor = '#dc3545';
+                            mtcnBtn.style.display = 'none';
+                        } else {
+                            statusBadge.style.backgroundColor = '#ffc107';
+                            statusBadge.style.color = '#000';
+                            mtcnBtn.style.display = 'none';
+                        }
+
+                        card.style.display = 'block';
+                    }
+                } else {
+                    alert('هیچ داواکارییەک بەو ژمارەیە نەدۆزرایەوە.');
+                }
+            })
+            .catch(() => {
+                loading.style.display = 'none';
+                alert('لە پەیوەندیکردن بە ڕاژەوە هەڵەیەک ڕوویدا؛ تکایە دووبارە هەوڵ بدەوە.');
+            });
+        }
+
+        function openReceiptModal() {
+            if (currentOrderData && currentOrderData.mtcn) {
+                openReceiptModalWithData(currentOrderData);
+            } else {
+                alert('ببورە، هێشتا ژمارەی MTCN بۆ ئەم داواکارییە دەرنەچووە.');
+            }
+        }
+
+        function openReceiptModalWithData(data) {
+            document.getElementById('mMTCN').innerText = data.mtcn || '----------';
+            document.getElementById('mSender').innerText = data.sender || 'N/A';
+            document.getElementById('mAmount').innerText = '$ ' + (data.amount || '0');
+            document.getElementById('mStatus').innerText = data.status || 'Completed';
+            
+            document.getElementById('wuReceiptModal').style.display = 'flex';
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('wuReceiptModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
